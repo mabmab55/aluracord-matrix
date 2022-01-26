@@ -25,7 +25,7 @@ export default function PaginaInicial() {
     //const username = 'mabmab55';
     const [username, setUsername] = React.useState('mabmab55');
     const roteamento = useRouter();
-
+    console.log(username.length)
     return (
         <>
             <Box
@@ -141,7 +141,10 @@ export default function PaginaInicial() {
                                 borderRadius: '50%',
                                 marginBottom: '16px',
                             }}
-                            src={`https://github.com/${username}.png`}
+                                                    
+                            src={
+                                username.length > 2 && `https://github.com/${username}.png` || `https://github.com/mabmab55.png`
+                            }
                         />
                         <Text
                             variant="body4"
