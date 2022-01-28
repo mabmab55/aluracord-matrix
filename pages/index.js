@@ -1,5 +1,5 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import appConfig from '../config.json';
 
@@ -27,14 +27,20 @@ export default function PaginaInicial() {
     //const username = 'mabmab55';
     const [username, setUsername] = React.useState('mabmab55');
     const roteamento = useRouter();
-    const [data, setData] = React.useState(null)
+    const [data, setData] = React.useState({})
     //console.log(username.length)
 
-    // fetch('https://api.github.com/users/'+username)
-    // .then((response) => response.json())
-    // .then((data) => {
-    //     setData(data);
-    // });
+    useEffect(() => {
+        function fetchApiGithub() {
+            fetch(`https://api.github.com/users/${username}`)
+            .then((response) => response.json())
+            .then((data) => {
+                setData(data);
+            });
+        }
+        fetchApiGithub()
+    }, [])
+
     return (
         <>
             <Box
@@ -174,7 +180,7 @@ export default function PaginaInicial() {
                                 borderRadius: '1000px'
                             }}
                         >
-                            {/* {data.location} */}
+                            {data.location}
                         </Text>
                     </Box>
                     {/* Photo Area */}
