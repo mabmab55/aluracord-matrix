@@ -30,11 +30,11 @@ export default function PaginaInicial() {
     const [data, setData] = React.useState(null)
     //console.log(username.length)
 
-    fetch('https://api.github.com/users/'+username)
-    .then((response) => response.json())
-    .then((data) => {
-        setData(data);
-    });
+    // fetch('https://api.github.com/users/'+username)
+    // .then((response) => response.json())
+    // .then((data) => {
+    //     setData(data);
+    // });
     return (
         <>
             <Box
@@ -174,7 +174,7 @@ export default function PaginaInicial() {
                                 borderRadius: '1000px'
                             }}
                         >
-                            {data.location}
+                            {/* {data.location} */}
                         </Text>
                     </Box>
                     {/* Photo Area */}

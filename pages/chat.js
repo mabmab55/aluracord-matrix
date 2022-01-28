@@ -1,6 +1,12 @@
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React from 'react';
 import appConfig from '../config.json';
+import { createClient } from '@supabase/supabase-js';
+
+const SUPABABE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzM3MjAzOSwiZXhwIjoxOTU4OTQ4MDM5fQ.q1MNIOaNXry3RE3zAzcY3c8mq2-lzikHan2xDYhZOiA';
+const SUPABASE_URL = 'https://jomicpykkcjhxgdxxpcp.supabase.co';
+const supabaseClient = createClient(SUPABASE_URL, SUPABABE_ANON_KEY);
+
 
 export default function ChatPage() {
     /* 
@@ -18,16 +24,41 @@ export default function ChatPage() {
     const [message, setMessage] = React.useState('');
     const [messageList, setMessageList] = React.useState([]);
 
+    React.useEffect(() => {
+        supabaseClient
+            .from('messages')
+            .select('*')
+            .order('id', {ascending: false})
+            .then((dados) => {
+                //console.log('Dados da consulta:', dados)
+                setMessageList(dados.data)
+        
+            });
+    }, []);
+
 
 
     function handleNewMessage(newMessage) {
         const message = {
-            id: messageList.length + 1,
+            //id: messageList.length + 1,
             from: 'mabmab55',
             text: newMessage,
         }
+
+        supabaseClient
+            .from('messages')
+            .insert([
+                //os campos do objeto (message) tem q ser OS MESMOS do supabase (from e text)
+                message
+            ])
+            .then((dados) => {
+                //console.log(dados);
+                setMessageList([
+                    dados[0], ...messageList
+                ])
+            })
         //console.log(event);
-        setMessageList([message, ...messageList]);
+        //setMessageList([message, ...messageList]);
         //console.log(messageList)
         setMessage('')
     }
@@ -138,7 +169,7 @@ function Header() {
 }
 
 function MessageList(props) {
-    console.log('MessageList', props);
+    //console.log('MessageList', props);
     return (
         <Box
             tag="ul"
@@ -180,7 +211,7 @@ function MessageList(props) {
                                 display: 'inline-block',
                                 marginRight: '8px',
                             }}
-                            src={`https://github.com/mabmab55.png`}
+                            src={`https://github.com/${message.from}.png`}
                         />
                         <Text tag="strong">
                             {message.from}
