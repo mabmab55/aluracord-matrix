@@ -3,6 +3,8 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import appConfig from '../config.json';
 
+
+
 // Componente React
 function Title(props) {
     const Tag = props.tag || 'h1';
@@ -25,7 +27,14 @@ export default function PaginaInicial() {
     //const username = 'mabmab55';
     const [username, setUsername] = React.useState('mabmab55');
     const roteamento = useRouter();
-    console.log(username.length)
+    const [data, setData] = React.useState(null)
+    //console.log(username.length)
+
+    fetch('https://api.github.com/users/'+username)
+    .then((response) => response.json())
+    .then((data) => {
+        setData(data);
+    });
     return (
         <>
             <Box
@@ -156,6 +165,16 @@ export default function PaginaInicial() {
                             }}
                         >
                             {username}
+                        </Text>
+                        <Text
+                            variant='body4'
+                            styleSheet={{
+                                color: appConfig.theme.colors.neutrals[200],
+                                padding: '3px 10px',
+                                borderRadius: '1000px'
+                            }}
+                        >
+                            {data.location}
                         </Text>
                     </Box>
                     {/* Photo Area */}
