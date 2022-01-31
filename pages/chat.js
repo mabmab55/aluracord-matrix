@@ -30,7 +30,7 @@ export default function ChatPage() {
             .select('*')
             .order('id', {ascending: false})
             .then((dados) => {
-                //console.log('Dados da consulta:', dados)
+                //console.log('Dados da consulta:', dados.data)
                 setMessageList(dados.data)
         
             });
@@ -54,7 +54,8 @@ export default function ChatPage() {
             .then((dados) => {
                 //console.log(dados);
                 setMessageList([
-                    dados[0], ...messageList
+                    dados.data[0], 
+                    ...messageList,
                 ])
             })
         //console.log(event);
@@ -155,7 +156,7 @@ function Header() {
         <>
             <Box styleSheet={{ width: '100%', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} >
                 <Text variant='heading5'>
-                    MENSAGENS 
+                    CHAT 
                 </Text>
                 <Button
                     variant='tertiary'
@@ -229,7 +230,7 @@ function MessageList(props) {
                     </Box>
                     {message.text}
                 </Text>
-                )
+                );
             })}
         </Box>
     )

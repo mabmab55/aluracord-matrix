@@ -35,11 +35,12 @@ export default function PaginaInicial() {
             fetch(`https://api.github.com/users/${username}`)
             .then((response) => response.json())
             .then((data) => {
+                console.log('tá dando fetch')
                 setData(data);
             });
         }
         fetchApiGithub()
-    }, [])
+    }, [username])
 
     return (
         <>
