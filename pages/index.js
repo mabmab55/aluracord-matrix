@@ -77,7 +77,7 @@ export default function PaginaInicial() {
                             //maneira padrão de trocar de página
                             //window.location.href = '/chat' 
                             //usando o next/react
-                            roteamento.push('/chat')
+                            roteamento.push(`/chat?username=${username}`)
                         }}
                         styleSheet={{
                             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
