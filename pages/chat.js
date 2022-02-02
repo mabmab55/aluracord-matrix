@@ -202,8 +202,12 @@ function MessageList(props) {
         <Box
             tag="ul"
             styleSheet={{
-                overflow: 'scroll',
+                overflow: 'auto',
                 display: 'flex',
+
+                wordWrap: 'break-word',
+
+
 
                 flexDirection: 'column-reverse',
                 flex: 1,
@@ -218,6 +222,7 @@ function MessageList(props) {
                     key={message.id}
                     tag="li"
                     styleSheet={{
+                        wordBreak: 'break-word',
                         borderRadius: '5px',
                         padding: '6px',
                         marginBottom: '12px',
