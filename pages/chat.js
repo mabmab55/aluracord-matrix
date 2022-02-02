@@ -53,7 +53,7 @@ export default function ChatPage() {
                 // Quero reusar um valor de referencia (objeto/array) a lista de mensagem
                 // Passa uma função pro setState, para puxar o atualizado
                 // Caso contrário ele puxa o valor vazio que foi o primeiro adquirido na linha 39
-                
+
                 setMessageList((valorAtualDaLista) => {
                     return [
                         newMessage, 
@@ -202,7 +202,7 @@ function MessageList(props) {
         <Box
             tag="ul"
             styleSheet={{
-                overflow: 'hidden',
+                overflow: 'scroll',
                 display: 'flex',
 
                 flexDirection: 'column-reverse',
